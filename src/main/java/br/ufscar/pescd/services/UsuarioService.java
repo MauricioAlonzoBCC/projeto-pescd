@@ -28,4 +28,11 @@ public class UsuarioService {
 
         return repository.save(usuario);
     }
+
+    public Usuario buscarPorUsername(String username) {
+
+        return repository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado: " + username));
+    }
+
 }

@@ -1,1 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
 <h1>PAGINA DO SECRETARIO</h1>
+
+<ul>
+    <li th:each="oferta : ${ofertas}">
+        <b th:text="${oferta.nome}"></b>
+        -
+        Professor : <span th:text="${oferta.prof}"></span>
+        -
+        Semestre : <span th:text="${oferta.semestre}"></span>
+        -
+        Inicio do semestre : <span th:text="${oferta.inicio}"></span>
+        -
+        Fim do semestre : <span th:text="${oferta.fim}"></span>
+        -
+        Alunos Matriculados : <span th:text="${oferta.matriculados}"></span>
+
+        -
+        Status:
+        <span th:text="${oferta.status}"></span>
+
+        <span th:if="${oferta.status == 'Concluida'}">
+            -
+            Data de Encerramento:
+            <span th:text="${#temporals.format(oferta.encerramento, 'dd/MM/yyyy, HH:mm:ss')}"></span>
+
+            -
+            Encerrado por:
+            <span th:text="${oferta.encerradoPor}"></span>
+
+        </span>
+
+        <form th:if="${oferta.status == 'Aguardando encerramento do secretario'}"
+                th:action="@{/secretario/encerrar/{id}(id=${oferta.id})}"
+              method="post"
+              style="display:inline">
+
+            <button
+                    type="submit"
+                    th:data-msg="${mensagem}"
+                    onclick="return confirm(this.dataset.msg);">
+                Encerrar
+            </button>
+
+        </form>
+    </li>
+</ul>
+
+</html>

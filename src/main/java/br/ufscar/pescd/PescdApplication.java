@@ -1,8 +1,10 @@
 package br.ufscar.pescd;
 
+import br.ufscar.pescd.model.FraseConfirmacao;
 import br.ufscar.pescd.model.Usuario;
 import br.ufscar.pescd.model.Oferta;
 
+import br.ufscar.pescd.repositories.FraseRepository;
 import br.ufscar.pescd.services.UsuarioService;
 import br.ufscar.pescd.services.OfertaService;
 
@@ -85,9 +87,9 @@ public class PescdApplication {
 				null,
 				LocalDate.of(2026, 3, 1),
 				LocalDate.of(2026, 7, 15),
-				"Programação Web",
+				"Web1",
 				"2026/1",
-				"Prof. João",
+				"João",
 				25
 		);
 
@@ -97,9 +99,9 @@ public class PescdApplication {
 				null,
 				LocalDate.of(2026, 8, 1),
 				LocalDate.of(2026, 12, 10),
-				"Banco de Dados",
+				"BD",
 				"2026/2",
-				"Prof. Maria",
+				"Maria",
 				30
 		);
 
@@ -109,9 +111,9 @@ public class PescdApplication {
 				null,
 				LocalDate.of(2025, 3, 1),
 				LocalDate.of(2025, 7, 15),
-				"Engenharia de Software",
+				"ES1",
 				"2025/1",
-				"Prof. Carlos",
+				"Carlos",
 				40
 		);
 
@@ -121,9 +123,9 @@ public class PescdApplication {
 				null,
 				LocalDate.of(2025, 8, 1),
 				LocalDate.of(2025, 12, 15),
-				"Inteligência Artificial",
+				"IA",
 				"2025/2",
-				"Prof. Ana",
+				"Ana",
 				20
 		);
 
@@ -133,13 +135,18 @@ public class PescdApplication {
 				null,
 				LocalDate.of(2024, 3, 1),
 				LocalDate.of(2024, 7, 15),
-				"Banco de Dados Avançado",
+				"Web2",
 				"2024/1",
-				"Prof. Marcos",
+				"Marcos",
 				18
 		);
 
 		ofertaService.salvar(oferta5);
 
+
+		FraseConfirmacao frase = new FraseConfirmacao("Deseja mesmo encerrar essa oferta?");
+		FraseRepository fraseRepository = context.getBean(FraseRepository.class);
+
+		fraseRepository.save(frase);
 	}
 }
