@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <h1>PAGINA DO SECRETARIO</h1>
-
+<h3>As atuais ofertas são:</h3>
 <ul>
     <li th:each="oferta : ${ofertas}">
         <b th:text="${oferta.nome}"></b>
@@ -47,5 +47,11 @@
         </form>
     </li>
 </ul>
+
+<a th:href="@{/secretario/criar_oferta}">
+    <button type="button">
+        Criar nova oferta
+    </button>
+</a>
 
 </html>

@@ -98,6 +98,7 @@ public class PescdApplication {
 				LocalDate.of(2026, 7, 15),
 				"Web1",
 				"2026/1",
+				secretario,
 				ProfJoao,
 				25
 		);
@@ -120,6 +121,7 @@ public class PescdApplication {
 				LocalDate.of(2026, 12, 10),
 				"BD",
 				"2026/2",
+				secretario,
 				ProfMaria,
 				30
 		);
@@ -132,6 +134,7 @@ public class PescdApplication {
 				LocalDate.of(2025, 7, 15),
 				"ES1",
 				"2025/1",
+				secretario,
 				ProfMaria,
 				40
 		);
@@ -144,6 +147,7 @@ public class PescdApplication {
 				LocalDate.of(2025, 12, 15),
 				"IA",
 				"2025/2",
+				secretario,
 				ProfJoao,
 				20
 		);
@@ -156,6 +160,7 @@ public class PescdApplication {
 				LocalDate.of(2024, 7, 15),
 				"Web2",
 				"2024/1",
+				secretario,
 				ProfMaria,
 				18
 		);

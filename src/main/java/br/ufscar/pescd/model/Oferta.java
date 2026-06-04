@@ -28,9 +28,9 @@ public class Oferta {
     private String semestre;
 
 
-    //AJEITAR O NULLABLE
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "criador_id", nullable = true)
+    @JoinColumn(name = "criador_id", nullable = false)
     private Usuario criador;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -56,6 +56,7 @@ public class Oferta {
                   LocalDate fim,
                   String nome,
                   String semestre,
+                  Usuario criador,
                   Usuario prof,
                   int matriculados) {
 
@@ -64,6 +65,7 @@ public class Oferta {
         this.fim = fim;
         this.nome = nome;
         this.semestre = semestre;
+        this.criador = criador;
         this.prof = prof;
         this.matriculados = matriculados;
 
@@ -127,7 +129,7 @@ public class Oferta {
         return encerradoPor;
     }
 
-    // SETTERS
+
     public void setStatus(String status) {
         this.status = status;
     }
@@ -138,5 +140,9 @@ public class Oferta {
 
     public void setEncerradoPor(String encerradoPor) {
         this.encerradoPor = encerradoPor;
+    }
+
+    public void setCriador(Usuario criador) {
+        this.criador = criador;
     }
 }

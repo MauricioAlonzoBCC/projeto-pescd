@@ -19,7 +19,7 @@ public class OfertaFormDTO {
     private LocalDate fim;
 
     @NotNull(message = "O Professor responsável não pode estar em branco")
-    private long professorResponsavelId;
+    private Long professorResponsavelId;
 
 
 
@@ -35,8 +35,8 @@ public class OfertaFormDTO {
     public LocalDate getFim() { return fim; }
     public void setFim(LocalDate fim) { this.fim = fim; }
 
-    public long getProfessorResponsavelId() { return professorResponsavelId; }
-    public void setProfessorResponsavelId(long professorResponsavelId) { this.professorResponsavelId = professorResponsavelId; }
+    public Long getProfessorResponsavelId() { return professorResponsavelId; }
+    public void setProfessorResponsavelId(Long professorResponsavelId) { this.professorResponsavelId = professorResponsavelId; }
 }
 
 

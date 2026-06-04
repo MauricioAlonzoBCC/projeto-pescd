@@ -9,6 +9,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UsuarioService {
 
@@ -32,7 +34,21 @@ public class UsuarioService {
     public Usuario buscarPorUsername(String username) {
 
         return repository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado: " + username));
+                .orElseThrow(() -> new RuntimeException("Nao existe usuario com username = " + username));
+    }
+
+    public Usuario buscarPorId(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Nao existe usuario com o id = " + id));
+    }
+
+    public List<Usuario> filtrarPorCargo(String cargo){
+        return repository.findByCargosContaining(cargo);
+    }
+
+
+    public List<Usuario> buscarTodos() {
+        return repository.findAll();
     }
 
 }
