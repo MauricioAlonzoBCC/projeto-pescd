@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Página do Visitante</title>
+    <title th:text="#{visitante.titulo}">Página do Visitante</title>
 </head>
 <body>
 
-<h1>PÁGINA DO VISITANTE</h1>
+<h1 th:text="#{visitante.titulo}">PÁGINA DO VISITANTE</h1>
 
-<h2>Ofertas</h2>
+<h2 th:text="#{visitante.ofertas}">Ofertas</h2>
 
 <ul>
     <li th:each="oferta : ${ofertas}">
         <b th:text="${oferta.nome}"></b>
         -
-        Professor : <span th:text="${oferta.prof}"></span>
+        <span th:text="#{visitante.prof}">Professor :</span> <span th:text="${oferta.prof.nome}"></span>
         -
-        Semestre : <span th:text="${oferta.semestre}"></span>
+        <span th:text="#{visitante.semestre}">Semestre :</span> <span th:text="${oferta.semestre}"></span>
         -
-        Inicio do semestre : <span th:text="${oferta.inicio}"></span>
+        <span th:text="#{visitante.inicio}">Inicio do semestre :</span> <span th:text="${oferta.inicio}"></span>
         -
-        Fim do semestre : <span th:text="${oferta.fim}"></span>
+        <span th:text="#{visitante.fim}">Fim do semestre :</span> <span th:text="${oferta.fim}"></span>
         -
-        Alunos Matriculados : <span th:text="${oferta.matriculados}"></span>
+        <span th:text="#{visitante.matriculados}">Alunos Matriculados :</span> <span th:text="${oferta.matriculados}"></span>
     </li>
 </ul>
 

@@ -9,42 +9,42 @@
 <body>
 
 <h1>
-    Olá,
+    <span th:text="#{home.oi}">Oi,</span>
     <span sec:authentication="name"></span>
 </h1>
 
-<p>
+<p th:text="#{home.possiveiPags}">
     Aqui estão as páginas que você pode acessar:
 </p>
 
 <ul>
 
     <li sec:authorize="hasRole('ALUNO')">
-        <a th:href="@{/aluno/main}">
+        <a th:href="@{/aluno/main}" th:text="#{home.areaAluno}">
             Área do Aluno
         </a>
     </li>
 
     <li sec:authorize="hasRole('RESPONSAVEL')">
-        <a th:href="@{/responsavel/main}">
+        <a th:href="@{/responsavel/main}" th:text="#{home.areaResp}">
             Área do Responsável
         </a>
     </li>
 
     <li sec:authorize="hasRole('SECRETARIO')">
-        <a th:href="@{/secretario/main}">
+        <a th:href="@{/secretario/main}" th:text="#{home.areaSecr}">
             Área do Secretário
         </a>
     </li>
 
     <li sec:authorize="hasRole('SUPERVISOR')">
-        <a th:href="@{/supervisor/main}">
+        <a th:href="@{/supervisor/main}" th:text="#{home.areaSuper}">
             Área do Supervisor
         </a>
     </li>
 
     <li sec:authorize="hasRole('ADMINISTRADOR')">
-        <a th:href="@{/administrador/main}">
+        <a th:href="@{/administrador/main}" th:text="#{home.areaAdmin}">
             Área do Administrador
         </a>
     </li>

@@ -97,7 +97,7 @@ public class PescdApplication {
 				null,
 				"Marcus Vinicius ",
 				List.of("ROLE_RESPONSAVEL"),
-				"joao",
+				"warcus",
 				"123"
 				);
 
@@ -117,9 +117,9 @@ public class PescdApplication {
 
 		Usuario ProfCatarina = new Usuario(
 				null,
-				"Maria",
+				"Catarina",
 				List.of("ROLE_SUPERVISOR"),
-				"maria",
+				"cati",
 				"123"
 		);
 

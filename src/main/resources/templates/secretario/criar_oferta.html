@@ -3,33 +3,33 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Criar nova oferta</title>
+    <title th:text="#{secr2.novaOferta1}">Criar nova oferta</title>
 </head>
 
 <body>
-<h1>Crie uma nova oferta!</h1>
+<h1 th:text="#{secr2.novaOferta1}">Crie uma nova oferta!</h1>
 
 <form th:action="@{/secretario/criar_oferta}" th:object="${ofertaFormDTO}" method="post">
 
     <div>
-        <label>Nome da oferta:</label>
+        <label th:text="#{secr2.nomeOferta}">Nome da oferta:</label>
         <input type="text" th:field="*{nome}">
     </div>
 
     <div>
-        <label>Semestre:</label>
+        <label th:text="#{secr2.semestre1}">Semestre:</label>
         <input type="text" th:field="*{semestre}" placeholder="Ex: 2026/1">
         <div th:if="${#fields.hasErrors('semestre')}" th:errors="*{semestre}" style="color: red;"></div>
     </div>
 
     <div>
-        <label>Data de início:</label>
+        <label th:text="#{secr2.dtInicio}">Data de início:</label>
         <input type="date" th:field="*{inicio}">
         <div th:if="${#fields.hasErrors('inicio')}" th:errors="*{inicio}" style="color: red;"></div>
     </div>
 
     <div>
-        <label>Data de fim:</label>
+        <label th:text="#{secr2.dtFim}">Data de fim:</label>
         <input type="date" th:field="*{fim}">
         <div th:if="${#fields.hasErrors('fim')}" th:errors="*{fim}" style="color: red;"></div>
 
@@ -37,9 +37,9 @@
     </div>
 
     <div>
-        <label>Professor responsável:</label>
+        <label th:text="#{secr2.profResp}">Professor responsável:</label>
         <select th:field="*{professorResponsavelId}">
-            <option value="">Selecione um professor...</option>
+            <option value="" th:text="#{secr2.selecioneResp}">Selecione um professor...</option>
             <option th:each="prof : ${professores}"
                     th:value="${prof.id}"
                     th:text="${prof.username}"></option>
@@ -47,7 +47,7 @@
         <div th:if="${#fields.hasErrors('professorResponsavelId')}" th:errors="*{professorResponsavelId}" style="color: red;"></div>
     </div>
 
-    <button type="submit">Processar</button>
+    <button type="submit" th:text="#{secr2.processar}">Processar</button>
 
 </form>
 </body>

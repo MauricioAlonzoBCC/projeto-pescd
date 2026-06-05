@@ -1,8 +1,14 @@
-<h1>PAGINA DO ADMINISTRADOR</h1>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{admin.titulo}"></title>
+</head>
+<body>
+<h1 th:text="#{admin.titulo}">PAGINA DO ADMINISTRADOR</h1>
 
 <form th:action="@{/administrador/alterarMensagem}" method="post">
 
-    <label>Mensagem exibida ao secretário:</label>
+    <label th:text="#{admin.msgParaSecretario}">Mensagem exibida ao secretário:</label>
     <br><br>
 
     <textarea
@@ -14,8 +20,11 @@
 
     <br><br>
 
-    <button type="submit">
+    <button type="submit" th:text="#{admin.salvar}">
         Salvar
     </button>
 
 </form>
+
+</body>
+</html>

@@ -3,10 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Adicionar alunos</title>
+    <title th:text="#{secr3.addAlunos}">Adicionar alunos</title>
 </head>
 <body>
-<h1>Adicione alunos à Oferta:</h1>
+<h1 th:text="#{secr3.addAlunos1}">Adicione alunos a Oferta:</h1>
 
 
 
@@ -14,52 +14,47 @@
 
 <hr>
 
-<h3>Adicionar aluno via Upload de Arquivo CSV</h3>
-<p>O arquivo deve conter as colunas: <b>RA, NOME_COMPLETO, EMAIL</b></p>
+<h3 th:text="#{secr3.addUpload}">Adicionar aluno via Upload de Arquivo CSV</h3>
+<p th:text="#{secr3.p1}">O arquivo deve conter as colunas: RA, NOME_COMPLETO, EMAIL</p>
 
 <form th:action="@{/secretario/oferta/{id}/alunos/upload(id=${oferta.id})}" method="post" enctype="multipart/form-data">
 
     <div>
-        <label for="arquivoCsv">Selecione o arquivo CSV:</label>
+        <label for="arquivoCsv" th:text="#{secr3.selCSV}">Selecione o arquivo CSV:</label>
         <input type="file" id="arquivoCsv" name="file" accept=".csv" required>
     </div>
 
     <br>
-    <button type="submit">Processar Upload</button>
+    <button type="submit" th:text="#{secr3.procUpload}">Processar Upload</button>
 
 </form>
 
 <hr>
 
-<h3>Adicionar aluno via Lista</h3>
-<!-- Adicionar aluno ja do BD-->
-
+<h3 th:text="#{secr3.addLista}">Adicionar aluno via Lista</h3>
 <form th:action="@{/secretario/oferta/{id}/add_aluno_lista(id=${oferta.id})}" th:object="${addAlunoFormDTO}" method="post">
 
-<div>
-    <label>Aluno a ser adicionado:</label>
-    <select th:field="*{alunoId}">
-        <option value="">Selecione um aluno...</option>
-        <option th:each="aluno : ${alunos}"
-                th:value="${aluno.id}"
-                th:text="${aluno.username}"></option>
-    </select>
-    <div th:if="${#fields.hasErrors('alunoId')}" th:errors="*{alunoId}" style="color: red;"></div>
+    <div>
+        <label th:text="#{secr3.label1}">Aluno a ser adicionado:</label>
+        <select th:field="*{alunoId}">
+            <option value="" th:text="#{secr3.selecioneAluno}">Selecione um aluno...</option>
+            <option th:each="aluno : ${alunos}"
+                    th:value="${aluno.id}"
+                    th:text="${aluno.username}"></option>
+        </select>
+        <div th:if="${#fields.hasErrors('alunoId')}" th:errors="*{alunoId}" style="color: red;"></div>
 
-    <button type="submit">Adicionar Aluno Selecionado</button>
+        <button type="submit" th:text="#{secr3.addAlunoSelecionado}">Adicionar Aluno Selecionado</button>
 
-</div>
+    </div>
 </form>
-<!----------------------------------------------------- -->
-
-
 <hr>
-<h3>Alunos já inscritos nesta Oferta:</h3>
+<h3 th:text="#{secr3.alunosInscritos}">Alunos já inscritos nesta Oferta:</h3>
 <h5 th:text="${oferta.matriculados}"></h5>
 <table border="1">
     <thead>
     <tr>
-        <th>Nome</th>
+        <th th:text="#{secr3.nome}">Nome</th>
         <th>Username / Email</th>
 
     </tr>
@@ -75,9 +70,8 @@
 
 <br>
 <a th:href="@{/secretario/main}">
-    <button type="button">Voltar para Ofertas</button>
+    <button type="button" th:text="#{secr3.voltar}">Voltar para Ofertas</button>
 </a>
 
 </body>
 </html>
-

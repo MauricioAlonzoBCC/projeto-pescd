@@ -3,58 +3,57 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Página do Secretário</title>
+    <title th:text="#{secr1.titulo}">Página do Secretário</title>
 </head>
 <body>
 
-<h1>PAGINA DO SECRETARIO</h1>
-<h3>As atuais ofertas são:</h3>
+<h1 th:text="#{secr1.titulo}">PAGINA DO SECRETARIO</h1>
+<h3 th:text="#{secr1.h3_1}">As atuais ofertas são:</h3>
 <ul>
     <li th:each="oferta : ${ofertas}">
         <b th:text="${oferta.nome}"></b>
         -
-        Professor : <span th:text="${oferta.prof.nome}"></span>
+        <span th:text="#{secr1.prof}">Professor :</span> <span th:text="${oferta.prof.nome}"></span>
         -
-        Semestre : <span th:text="${oferta.semestre}"></span>
+        <span th:text="#{secr1.semestre}">Semestre :</span> <span th:text="${oferta.semestre}"></span>
         -
-        Inicio do semestre : <span th:text="${oferta.inicio}"></span>
+        <span th:text="#{secr1.inicio}">Inicio do semestre :</span> <span th:text="${oferta.inicio}"></span>
         -
-        Fim do semestre : <span th:text="${oferta.fim}"></span>
+        <span th:text="#{secr1.fim}">Fim do semestre :</span> <span th:text="${oferta.fim}"></span>
         -
-        Alunos Matriculados : <span th:text="${oferta.matriculados}"></span>
+        <span th:text="#{secr1.matriculados}">Alunos Matriculados :</span> <span th:text="${oferta.matriculados}"></span>
 
         -
-        Status:
-        <span th:text="${oferta.status}"></span>
+        Status: <span th:text="#{${oferta.status}}"></span>
 
         <span th:if="${oferta.status == 'Concluida'}">
             -
-            Data de Encerramento:
+            <span th:text="#{secr1.dtEncerramento}">Data de Encerramento:</span>
             <span th:text="${#temporals.format(oferta.encerramento, 'dd/MM/yyyy, HH:mm:ss')}"></span>
 
             -
-            Encerrado por:
+            <span th:text="#{secr1.encerradoPor}">Encerrado por:</span>
             <span th:text="${oferta.encerradoPor}"></span>
 
         </span>
 
         <form th:if="${oferta.status == 'Aguardando encerramento do secretario'}"
-                th:action="@{/secretario/encerrar/{id}(id=${oferta.id})}"
+              th:action="@{/secretario/encerrar/{id}(id=${oferta.id})}"
               method="post"
               style="display:inline">
             <button
                     type="submit"
                     th:data-msg="${mensagem}"
-                    onclick="return confirm(this.dataset.msg);">
+                    onclick="return confirm(this.dataset.msg);"
+                    th:text="#{secr1.encerrar}">
                 Encerrar
             </button>
 
         </form>
-<!-- ---------------------------------------------------------------------------------->
         <span th:if="${oferta.status != 'Aguardando encerramento do secretario' && oferta.status != 'Concluida' }">
 
             <a th:href="@{/secretario/oferta/{id}/alunos(id=${oferta.id})}">
-                <button type="button">
+                <button type="button" th:text="#{secr1.addAluno}">
                     Adicionar Aluno(s)
                 </button>
             </a>
@@ -68,7 +67,7 @@
 </ul>
 
 <a th:href="@{/secretario/criar_oferta}">
-    <button type="button">
+    <button type="button" th:text="#{secr1.novaOferta}">
         Criar nova oferta
     </button>
 </a>
