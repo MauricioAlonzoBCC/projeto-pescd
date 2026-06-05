@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import org.springframework.stereotype.Service;
-
+import java.util.Optional;
 import java.util.List;
 
 @Service
@@ -35,6 +35,11 @@ public class UsuarioService {
 
         return repository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("Nao existe usuario com username = " + username));
+    }
+
+
+    public Optional<Usuario> buscarOptionalPorUsername(String username) {
+        return repository.findByUsername(username);
     }
 
     public Usuario buscarPorId(Long id) {

@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
+<head>
+    <meta charset="UTF-8">
+    <title>Página do Secretário</title>
+</head>
+<body>
+
 <h1>PAGINA DO SECRETARIO</h1>
 <h3>As atuais ofertas são:</h3>
 <ul>
@@ -36,7 +42,6 @@
                 th:action="@{/secretario/encerrar/{id}(id=${oferta.id})}"
               method="post"
               style="display:inline">
-
             <button
                     type="submit"
                     th:data-msg="${mensagem}"
@@ -45,6 +50,20 @@
             </button>
 
         </form>
+<!-- ---------------------------------------------------------------------------------->
+        <span th:if="${oferta.status != 'Aguardando encerramento do secretario' && oferta.status != 'Concluida' }">
+
+            <a th:href="@{/secretario/oferta/{id}/alunos(id=${oferta.id})}">
+                <button type="button">
+                    Adicionar Aluno(s)
+                </button>
+            </a>
+
+        </span>
+
+
+
+
     </li>
 </ul>
 
@@ -53,5 +72,5 @@
         Criar nova oferta
     </button>
 </a>
-
+</body>
 </html>

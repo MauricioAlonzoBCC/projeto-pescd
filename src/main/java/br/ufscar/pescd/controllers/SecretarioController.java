@@ -1,10 +1,13 @@
 package br.ufscar.pescd.controllers;
 
+import br.ufscar.pescd.dto.AddAlunoFormDTO;
 import br.ufscar.pescd.dto.OfertaFormDTO;
 import br.ufscar.pescd.model.FraseConfirmacao;
 import br.ufscar.pescd.model.Oferta;
 import br.ufscar.pescd.model.Usuario;
 import br.ufscar.pescd.repositories.FraseRepository;
+import br.ufscar.pescd.repositories.InscricaoRepository;
+import br.ufscar.pescd.services.InscricaoService;
 import br.ufscar.pescd.services.OfertaService;
 import br.ufscar.pescd.services.UsuarioService;
 import jakarta.validation.Valid;
@@ -18,6 +21,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import java.time.LocalDateTime;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.multipart.MultipartFile;import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 @RequestMapping("/secretario")
@@ -29,6 +34,12 @@ public class SecretarioController {
     private FraseRepository fraseRepository;
     @Autowired
     private UsuarioService usuarioService;
+
+    @Autowired
+    private InscricaoService inscricaoService;
+
+    @Autowired
+    private InscricaoRepository inscricaoRepository;
 
     @GetMapping("/main")
     public String main(Model model) {
@@ -124,4 +135,56 @@ public class SecretarioController {
 
 
     }
+
+
+    @GetMapping("/oferta/{id}/alunos")
+    public String adicionarAlunos(@PathVariable Long id, Model model){
+        Oferta oferta = ofertaService.buscarPorId(id);
+        model.addAttribute("oferta", oferta);
+
+        model.addAttribute("alunos", usuarioService.filtrarPorCargo("ROLE_ALUNO") );
+        model.addAttribute("addAlunoFormDTO", new AddAlunoFormDTO());
+        model.addAttribute("inscricoes", inscricaoRepository.findByOfertaId(id));
+        return "secretario/add_aluno";
+    }
+
+
+    @PostMapping("/oferta/{id}/add_aluno_lista")
+    public String processarAlunoBD(@PathVariable Long id,
+                                   @Valid @ModelAttribute("addAlunoFormDTO") AddAlunoFormDTO dto,
+                                   BindingResult result,
+                                   Model model){
+        if(result.hasErrors()){
+            model.addAttribute("oferta", ofertaService.buscarPorId(id));
+            model.addAttribute("alunos", usuarioService.filtrarPorCargo("ROLE_ALUNO"));
+            model.addAttribute("inscricoes", inscricaoRepository.findByOfertaId(id));
+            return "secretario/add_aluno";
+        }
+
+
+        inscricaoService.inscreverAluno(id, dto.getAlunoId());
+
+        return "redirect:/secretario/oferta/" + id + "/alunos?sucesso=true";
+    }
+
+
+    @PostMapping("/oferta/{id}/alunos/upload")
+    public String processarUploadAlunos(@PathVariable Long id,
+                                        @RequestParam("file") MultipartFile file,
+                                        Model model){
+        if (file.isEmpty()) {
+            return "redirect:/secretario/oferta/" + id + "/alunos?erro=arquivo_vazio";
+        }
+
+        try {
+             inscricaoService.processarCsvInscricoes(id, file);
+             return "redirect:/secretario/oferta/" + id + "/alunos?sucesso=true";
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/secretario/oferta/" + id + "/alunos?erro=processamento";
+        }
+
+    }
+
 }

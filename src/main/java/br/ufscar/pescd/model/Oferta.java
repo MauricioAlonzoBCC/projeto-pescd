@@ -145,4 +145,6 @@ public class Oferta {
     public void setCriador(Usuario criador) {
         this.criador = criador;
     }
+
+    public void incrementaNroEstudantes(){ this.matriculados = this.matriculados + 1;}
 }

@@ -42,13 +42,23 @@ public class PescdApplication {
 
 		Usuario aluno = new Usuario(
 				null,
-				"Aluno",
+				"Murilo Terra",
 				List.of("ROLE_ALUNO"),
-				"aluno",
+				"cheasegreater",
 				"123"
 		);
 
 		usuarioService.salvar(aluno);
+
+		Usuario aluno2 = new Usuario(
+				null,
+				"Luis Gustavo",
+				List.of("ROLE_ALUNO"),
+				"lui@gmail.com",
+				"123"
+		);
+
+		usuarioService.salvar(aluno2);
 
 		Usuario secretario = new Usuario(
 				null,
@@ -83,15 +93,15 @@ public class PescdApplication {
 		OfertaService ofertaService =
 				context.getBean(OfertaService.class);
 
-		Usuario ProfJoao = new Usuario(
+		Usuario ProfMarcus = new Usuario(
 				null,
-				"Joao",
+				"Marcus Vinicius ",
 				List.of("ROLE_RESPONSAVEL"),
 				"joao",
 				"123"
 				);
 
-		usuarioService.salvar(ProfJoao);
+		usuarioService.salvar(ProfMarcus);
 		Oferta oferta1 = new Oferta(
 				null,
 				LocalDate.of(2026, 3, 1),
@@ -99,13 +109,13 @@ public class PescdApplication {
 				"Web1",
 				"2026/1",
 				secretario,
-				ProfJoao,
-				25
+				ProfMarcus,
+				0
 		);
 
 		ofertaService.salvar(oferta1);
 
-		Usuario ProfMaria = new Usuario(
+		Usuario ProfCatarina = new Usuario(
 				null,
 				"Maria",
 				List.of("ROLE_SUPERVISOR"),
@@ -113,7 +123,7 @@ public class PescdApplication {
 				"123"
 		);
 
-		usuarioService.salvar(ProfMaria);
+		usuarioService.salvar(ProfCatarina);
 
 		Oferta oferta2 = new Oferta(
 				null,
@@ -122,8 +132,8 @@ public class PescdApplication {
 				"BD",
 				"2026/2",
 				secretario,
-				ProfMaria,
-				30
+				ProfCatarina,
+				0
 		);
 
 		ofertaService.salvar(oferta2);
@@ -135,8 +145,8 @@ public class PescdApplication {
 				"ES1",
 				"2025/1",
 				secretario,
-				ProfMaria,
-				40
+				ProfCatarina,
+				0
 		);
 
 		ofertaService.salvar(oferta3);
@@ -148,8 +158,8 @@ public class PescdApplication {
 				"IA",
 				"2025/2",
 				secretario,
-				ProfJoao,
-				20
+				ProfMarcus,
+				0
 		);
 
 		ofertaService.salvar(oferta4);
@@ -161,8 +171,8 @@ public class PescdApplication {
 				"Web2",
 				"2024/1",
 				secretario,
-				ProfMaria,
-				18
+				ProfCatarina,
+				0
 		);
 
 		ofertaService.salvar(oferta5);

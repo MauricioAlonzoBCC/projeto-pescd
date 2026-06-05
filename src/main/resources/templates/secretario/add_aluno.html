@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Adicionar alunos</title>
+</head>
+<body>
+<h1>Adicione alunos à Oferta:</h1>
+
+
+
+<h3 th:text="${oferta.nome} + ' - ' + ${oferta.semestre}"></h3>
+
+<hr>
+
+<h3>Adicionar aluno via Upload de Arquivo CSV</h3>
+<p>O arquivo deve conter as colunas: <b>RA, NOME_COMPLETO, EMAIL</b></p>
+
+<form th:action="@{/secretario/oferta/{id}/alunos/upload(id=${oferta.id})}" method="post" enctype="multipart/form-data">
+
+    <div>
+        <label for="arquivoCsv">Selecione o arquivo CSV:</label>
+        <input type="file" id="arquivoCsv" name="file" accept=".csv" required>
+    </div>
+
+    <br>
+    <button type="submit">Processar Upload</button>
+
+</form>
+
+<hr>
+
+<h3>Adicionar aluno via Lista</h3>
+<!-- Adicionar aluno ja do BD-->
+
+<form th:action="@{/secretario/oferta/{id}/add_aluno_lista(id=${oferta.id})}" th:object="${addAlunoFormDTO}" method="post">
+
+<div>
+    <label>Aluno a ser adicionado:</label>
+    <select th:field="*{alunoId}">
+        <option value="">Selecione um aluno...</option>
+        <option th:each="aluno : ${alunos}"
+                th:value="${aluno.id}"
+                th:text="${aluno.username}"></option>
+    </select>
+    <div th:if="${#fields.hasErrors('alunoId')}" th:errors="*{alunoId}" style="color: red;"></div>
+
+    <button type="submit">Adicionar Aluno Selecionado</button>
+
+</div>
+</form>
+<!----------------------------------------------------- -->
+
+
+<hr>
+<h3>Alunos já inscritos nesta Oferta:</h3>
+<h5 th:text="${oferta.matriculados}"></h5>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Nome</th>
+        <th>Username / Email</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="inscricao : ${inscricoes}">
+        <td th:text="${inscricao.aluno.nome}"></td>
+        <td th:text="${inscricao.aluno.username}"></td>
+    </tr>
+    </tbody>
+</table>
+
+
+<br>
+<a th:href="@{/secretario/main}">
+    <button type="button">Voltar para Ofertas</button>
+</a>
+
+</body>
+</html>
+
