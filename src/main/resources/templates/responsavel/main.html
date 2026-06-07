@@ -1,18 +1,70 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title th:text="#{resp.titulo}"></title>
+    <meta charset="UTF-8">
+    <title th:text="#{resp.titulo}">
+        Página do Professor Responsável
+    </title>
 </head>
+
 <body>
 
-<h1 th:text="#{resp.titulo}"></h1>
+<h1 th:text="#{resp.titulo}">
+    PAGINA DO PROFESSOR RESPONSAVEL
+</h1>
 
-</body>
+<ul>
+    <li th:each="oferta : ${ofertas}">
+
+        <b th:text="${oferta.nome}"></b>
+
+        -
+        Professor:
+        <span th:text="${oferta.prof.nome}"></span>
+
+        -
+        Semestre:
+        <span th:text="${oferta.semestre}"></span>
+
+        -
+        Início:
+        <span th:text="${oferta.inicio}"></span>
+
+        -
+        Fim:
+        <span th:text="${oferta.fim}"></span>
+
+        -
+        Alunos Matriculados:
+        <span th:text="${oferta.matriculados}"></span>
+
+        -
+        Status:
+        <span th:text="#{${oferta.status}}"></span>
+
+        <form th:if="${oferta.status == 'Em andamento'}"
+              th:action="@{/responsavel/finalizar/{id}(id=${oferta.id})}"
+              method="post"
+              style="display:inline">
+
+            <button type="submit">
+                Solicitar Encerramento
+            </button>
+
+        </form>
+
+    </li>
+</ul>
 
 <br>
 <hr>
+
 <a th:href="@{/login}">
-    <button type="button" th:text="#{geral.voltarLogin}">Voltar para a tela de Login</button>
+    <button type="button" th:text="#{geral.voltarLogin}">
+        Voltar para a tela de Login
+    </button>
 </a>
 
+</body>
 </html>

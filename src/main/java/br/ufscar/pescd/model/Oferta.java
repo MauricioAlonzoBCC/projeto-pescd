@@ -18,7 +18,7 @@ public class Oferta {
     @Column(nullable = false)
     private LocalDate inicio;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private LocalDate fim;
 
     @Column(nullable = false)
