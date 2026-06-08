@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Aprovar Relatório</title>
+</head>
+<body>
+<h2>Avaliar Relatório de Estágio</h2>
+
+<div>
+    <p><strong>Aluno:</strong> <span th:text="${inscricao.aluno.nome}"></span></p>
+    <p><strong>Disciplina Ministrada:</strong> <span th:text="${inscricao.nomeDisciplina}"></span></p>
+    <p><strong>Arquivo Relatório:</strong> <a th:href="@{/download/relatorio/{id}(id=${inscricao.id})}">Baixar Relatório do Aluno</a></p>
+</div>
+
+<form th:action="@{/supervisor/aprovar-relatorio}" th:object="${aprovarRelatorioForm}" method="post">
+    <input type="hidden" th:field="*{inscricaoID}" />
+
+    <div>
+        <label>Indicador de Frequência (%):</label>
+        <input type="number" th:field="*{frequencia}" min="0" max="100"/>
+        <p th:if="${#fields.hasErrors('frequencia')}" th:errors="*{frequencia}">Erro Frequência</p>
+    </div>
+
+    <div>
+        <label>Sugestão de Nota (A, B, C, D ou E):</label>
+        <select th:field="*{nota}">
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+            <option value="E">E</option>
+        </select>
+        <p th:if="${#fields.hasErrors('nota')}" th:errors="*{nota}">Erro Nota</p>
+    </div>
+
+    <div>
+        <label>Parecer:</label>
+        <textarea th:field="*{parecer}" rows="5"></textarea>
+        <p th:if="${#fields.hasErrors('parecer')}" th:errors="*{parecer}">Erro Parecer</p>
+    </div>
+
+    <button type="submit">Aprovar</button>
+    <a th:href="@{/supervisor/main}"><button type="button">Cancelar</button></a>
+</form>
+</body>
+</html>

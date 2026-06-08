@@ -121,14 +121,13 @@ public class InscricaoService {
     public void aprovarPlano(br.ufscar.pescd.dto.AprovarPlanoFormDTO dto) {
         Inscricao inscricao = buscarPorID(dto.getInscricaoID());
 
-        // salva os dados preenchidos
         inscricao.setParecerPlano(dto.getParecer());
 
-        // o status do aluno muda pra "plano aprovado"
         inscricao.setStatusPlano(StatusPlano.APROVADO);
 
-        // o sistema registra o timestamp da operação
         inscricao.setDataAprovacaoPlano(java.time.LocalDateTime.now());
+
+        inscricaoRepository.save(inscricao);
     }
 
     public void enviarRelatorioFinal(Long inscricaoID, RelatorioFinalFormDTO dto) throws IOException {
@@ -146,6 +145,20 @@ public class InscricaoService {
 
     public List<Inscricao> buscarPorSupervisor(Usuario supervisor) {
         return inscricaoRepository.findByOfertaProf(supervisor);
+    }
+
+    public void aprovarRelatorio(br.ufscar.pescd.dto.AprovarRelatorioFormDTO dto) {
+        Inscricao inscricao = buscarPorID(dto.getInscricaoID());
+
+        inscricao.setParecerRelatorio(dto.getParecer());
+        inscricao.setFrequencia(dto.getFrequencia());
+        inscricao.setSugestaoNota(dto.getNota());
+
+        inscricao.setStatusPlano(StatusPlano.RELATORIO_APROVADO_SUPERVISOR);
+
+        inscricao.setDataAprovacaoRelatorio(java.time.LocalDateTime.now());
+
+        inscricaoRepository.save(inscricao);
     }
 
     // adiciona via csv

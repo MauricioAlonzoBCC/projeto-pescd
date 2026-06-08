@@ -213,5 +213,12 @@ public class PescdApplication {
 		inscricao2.setStatusPlano(StatusPlano.ENVIADO);
 
 		inscricaoService.salvar(inscricao2);
+
+		Inscricao inscricao3 = new Inscricao(aluno2, oferta3);
+		inscricao3.setStatusPlano(StatusPlano.RELATORIO_ENVIADO);
+		inscricao3.setInstituicaoMinistrou("Ufscar");
+		inscricao3.setNomeDisciplinaMinistrada("Eng. software");
+
+		inscricaoService.salvar(inscricao3);
 	}
 }

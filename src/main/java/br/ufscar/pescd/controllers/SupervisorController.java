@@ -1,6 +1,7 @@
 package br.ufscar.pescd.controllers;
 
 import br.ufscar.pescd.dto.AprovarPlanoFormDTO;
+import br.ufscar.pescd.dto.AprovarRelatorioFormDTO;
 import br.ufscar.pescd.model.Inscricao;
 import br.ufscar.pescd.model.StatusPlano;
 import br.ufscar.pescd.services.InscricaoService;
@@ -70,5 +71,37 @@ public class SupervisorController {
 
         inscricaoService.aprovarPlano(form);
         return "redirect:/supervisor/main?sucesso=plano_aprovado";
+    }
+
+    @GetMapping("/aprovar-relatorio/{id}")
+    public String exibirFormularioAprovacaoRelatorio(@PathVariable("id") Long id, Model model) {
+        Inscricao inscricao = inscricaoService.buscarPorID(id);
+
+        if (inscricao.getStatusPlano() != StatusPlano.RELATORIO_ENVIADO) {
+            return "redirect:/supervisor/main?erro=status_invalido";
+        }
+
+        AprovarRelatorioFormDTO form = new AprovarRelatorioFormDTO();
+        form.setInscricaoID(id);
+
+        form.setFrequencia(inscricao.getFrequencia());
+
+        model.addAttribute("inscricao", inscricao);
+        model.addAttribute("aprovarRelatorioForm", form);
+
+        return "supervisor/aprovar_relatorio";
+    }
+
+    @PostMapping("/aprovar-relatorio")
+    public String processarAprovacaoRelatorio(@Valid @ModelAttribute("aprovarRelatorioForm") AprovarRelatorioFormDTO form,
+                                              BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            Inscricao inscricao = inscricaoService.buscarPorID(form.getInscricaoID());
+            model.addAttribute("inscricao", inscricao);
+            return "supervisor/aprovar_relatorio";
+        }
+
+        inscricaoService.aprovarRelatorio(form);
+        return "redirect:/supervisor/main?sucesso=relatorio_aprovado";
     }
 }

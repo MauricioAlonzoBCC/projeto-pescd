@@ -46,6 +46,18 @@ public class Inscricao {
     @Column(name = "data_aprovacao_plano")
     private LocalDateTime dataAprovacaoPlano;
 
+    @Column(name = "frequencia")
+    private Integer frequencia;
+
+    @Column(columnDefinition = "TEXT", name = "parecer_relatorio")
+    private String parecerRelatorio;
+
+    @Column(name = "sugestao_nota", length = 1)
+    private String sugestaoNota;
+
+    @Column(name = "data_aprovacao_relatorio")
+    private LocalDateTime dataAprovacaoRelatorio;
+
     @Lob // armazenar arquivos binários grandes no banco de dados
     @Column(name = "arquivo_documentacao", length = 5242880) // máx de 5MB
     private byte[] arquivoDocumentacao;
@@ -170,4 +182,16 @@ public class Inscricao {
     public void setDataAprovacaoPlano(LocalDateTime dataAprovacaoPlano) { this.dataAprovacaoPlano = dataAprovacaoPlano; }
     public byte[] getArquivoRelatorioFinal() { return arquivoRelatorioFinal; }
     public void setArquivoRelatorioFinal(byte[] arquivoRelatorioFinal) { this.arquivoRelatorioFinal = arquivoRelatorioFinal; }
+
+    public Integer getFrequencia() { return frequencia; }
+    public void setFrequencia(Integer frequencia) { this.frequencia = frequencia; }
+
+    public String getParecerRelatorio() { return parecerRelatorio; }
+    public void setParecerRelatorio(String parecerRelatorio) { this.parecerRelatorio = parecerRelatorio; }
+
+    public String getSugestaoNota() { return sugestaoNota; }
+    public void setSugestaoNota(String sugestaoNota) { this.sugestaoNota = sugestaoNota; }
+
+    public LocalDateTime getDataAprovacaoRelatorio() { return dataAprovacaoRelatorio; }
+    public void setDataAprovacaoRelatorio(LocalDateTime dataAprovacaoRelatorio) { this.dataAprovacaoRelatorio = dataAprovacaoRelatorio; }
 }

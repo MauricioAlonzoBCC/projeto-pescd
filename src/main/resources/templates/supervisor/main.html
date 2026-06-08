@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard do Supervisor</title>
+</head>
 <body>
 <h1 th:text="#{super1.titulo}">Ofertas sob minha supervisão</h1>
 
@@ -14,9 +20,17 @@
     <tr th:each="inscricao : ${inscricoes}">
         <td th:text="${inscricao.oferta.nome}"></td>
         <td th:text="${inscricao.aluno.nome}"></td>
-        <td th:text="${inscricao.statusPlano}"></td>
+        <td th:text="#{status.__${inscricao.statusPlano.name()}__}"></td>
         <td>
-            <a th:href="@{/supervisor/aprovar-plano/{id}(id=${inscricao.id})}" th:text="#{supervisor.acao.analisar}">Analisar</a>
+            <a th:if="${inscricao.statusPlano.name() == 'ENVIADO'}"
+               th:href="@{/supervisor/aprovar-plano/{id}(id=${inscricao.id})}"
+               th:text="#{supervisor.acao.analisar.plano} ?: 'Analisar Plano'">Analisar Plano</a>
+
+            <a th:if="${inscricao.statusPlano.name() == 'RELATORIO_ENVIADO'}"
+               th:href="@{/supervisor/aprovar-relatorio/{id}(id=${inscricao.id})}"
+               th:text="#{supervisor.acao.analisar.relatorio} ?: 'Analisar Relatório'">Analisar Relatório</a>
+
+            <span th:if="${inscricao.statusPlano.name() != 'ENVIADO' && inscricao.statusPlano.name() != 'RELATORIO_ENVIADO'}">-</span>
         </td>
     </tr>
     </tbody>
@@ -28,3 +42,4 @@
     <button type="button" th:text="#{geral.voltarLogin}">Voltar</button>
 </a>
 </body>
+</html>
