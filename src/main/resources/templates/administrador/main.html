@@ -5,14 +5,23 @@
     <title th:text="#{admin.titulo}">Administração</title>
 </head>
 <body>
-<h1 th:text="#{admin.titulo}">PAGINA DO ADMINISTRADOR</h1>
+
+<h1 th:text="#{admin.titulo}">
+    PAGINA DO ADMINISTRADOR
+</h1>
 
 <hr>
 
-<h2 th:text="#{admin.gerenciamento.usuarios}">Gerenciamento de Usuários</h2>
+<h2 th:text="#{admin.gerenciamento.usuarios}">
+    Gerenciamento de Usuários
+</h2>
+
 <a th:href="@{/administrador/novoUsuario}">
-    <button type="button" th:text="#{admin.btn.novoUsuario}">Novo Usuário</button>
+    <button type="button" th:text="#{admin.btn.novoUsuario}">
+        Novo Usuário
+    </button>
 </a>
+
 <br><br>
 
 <table border="1" style="width: 100%; text-align: left;">
@@ -25,68 +34,112 @@
         <th th:text="#{admin.tabela.acoes}">Ações</th>
     </tr>
     </thead>
+
     <tbody>
     <tr th:each="user : ${usuarios}">
         <td th:text="${user.id}"></td>
         <td th:text="${user.nome}"></td>
         <td th:text="${user.username}"></td>
         <td th:text="${#strings.listJoin(user.cargos, ', ')}"></td>
+
         <td>
-            <a th:href="@{/administrador/editarUsuario/{id}(id=${user.id})}" th:text="#{admin.acao.editar}">Editar</a> |
+            <a th:href="@{/administrador/editarUsuario/{id}(id=${user.id})}"
+               th:text="#{admin.acao.editar}">
+                Editar
+            </a>
+            |
+
             <a th:href="@{/administrador/excluirUsuario/{id}(id=${user.id})}"
                th:attr="onclick=|return confirm('#{admin.confirmacao.exclusao}')|"
-               th:text="#{admin.acao.excluir}">Excluir</a>
+               th:text="#{admin.acao.excluir}">
+                Excluir
+            </a>
         </td>
     </tr>
     </tbody>
 </table>
 
 <br>
+
 <hr>
 
-<h2 th:text="#{admin.titulo.mensagemSecretaria}">Mensagem da Secretaria</h2>
+<h2 th:text="#{admin.titulo.mensagemSecretaria}">
+    Mensagem da Secretaria
+</h2>
+
 <form th:action="@{/administrador/alterarMensagem}" method="post">
-    <label th:text="#{admin.msgParaSecretario}">Mensagem exibida ao secretário:</label>
+
+    <label th:text="#{admin.msgParaSecretario}">
+        Mensagem exibida ao secretário:
+    </label>
+
     <br><br>
-    <textarea name="texto" rows="4" cols="60" th:text="${mensagem}"></textarea>
+
+    <textarea name="texto"
+              rows="4"
+              cols="60"
+              th:text="${mensagem}">
+    </textarea>
+
     <br><br>
-    <button type="submit" th:text="#{admin.salvar}">Salvar</button>
+
+    <button type="submit"
+            th:text="#{admin.salvar}">
+        Salvar
+    </button>
+
 </form>
 
 <br>
 
 <hr>
 
-<h2>Buscar Oferta por Nome</h2>
+<h2 th:text="#{admin.buscarOferta.titulo}">
+    Buscar Oferta por Nome
+</h2>
 
 <form th:action="@{/administrador/buscarOferta}" method="post">
 
-    <label>Nome da oferta:</label>
+    <label th:text="#{admin.buscarOferta.nome}">
+        Nome da oferta:
+    </label>
+
     <br><br>
 
     <input type="text" name="nome" required>
 
-    <button type="submit">
+    <button type="submit"
+            th:text="#{admin.buscarOferta.buscar}">
         Buscar
     </button>
 
 </form>
 
-<h2>Resultado da Busca</h2>
+<br>
 
-<table th:if="${ofertasEncontradas != null}"
+<h2 th:if="${ofertasEncontradas != null}"
+    th:text="#{admin.buscarOferta.resultado}">
+    Resultado da Busca
+</h2>
+
+<p th:if="${ofertasEncontradas != null and #lists.isEmpty(ofertasEncontradas)}"
+   th:text="#{admin.oferta.naoEncontrada}">
+    Nenhuma oferta encontrada.
+</p>
+
+<table th:if="${ofertasEncontradas != null and !#lists.isEmpty(ofertasEncontradas)}"
        border="1"
        style="width: 100%; text-align: left;">
 
     <thead>
     <tr>
-        <th>Nome</th>
-        <th>Professor</th>
-        <th>Semestre</th>
-        <th>Início</th>
-        <th>Fim</th>
-        <th>Matriculados</th>
-        <th>Status</th>
+        <th th:text="#{admin.oferta.nome}">Nome</th>
+        <th th:text="#{admin.oferta.professor}">Professor</th>
+        <th th:text="#{admin.oferta.semestre}">Semestre</th>
+        <th th:text="#{admin.oferta.inicio}">Início</th>
+        <th th:text="#{admin.oferta.fim}">Fim</th>
+        <th th:text="#{admin.oferta.matriculados}">Matriculados</th>
+        <th th:text="#{admin.oferta.status}">Status</th>
     </tr>
     </thead>
 
@@ -104,9 +157,15 @@
 
 </table>
 
+<br>
+
 <hr>
+
 <a th:href="@{/login}">
-    <button type="button" th:text="#{geral.voltarLogin}">Voltar para a tela de Login</button>
+    <button type="button"
+            th:text="#{geral.voltarLogin}">
+        Voltar para a tela de Login
+    </button>
 </a>
 
 </body>
