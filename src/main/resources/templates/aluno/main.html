@@ -27,6 +27,10 @@
         <span th:text="#{aluno.status}">Status:</span>
         <span th:text="#{${'status.' + inscricao.statusPlano.name()}}"></span>
 
+        <br>
+        <span th:text="#{aluno.statusOferta}">Status da Oferta:</span>
+        <span th:text="#{${inscricao.oferta.status}}"></span>
+
         <br><br>
 
         <a th:if="${inscricao.statusPlano.name() == 'PENDENTE'}" th:href="@{/aluno/enviarDocumentacao/{id}(id=${inscricao.id})}">
@@ -34,37 +38,18 @@
         </a>
 
         <br><br>
-    </li>
-</ul>
-
-<br>
-<hr>
-
-<a th:href="@{/login}">
-    <button type="button" th:text="#{geral.voltarLogin}">Voltar para a tela de Login</button>
-</a>
-
-        -
-        <span>Status da Oferta:</span> <span th:text="#{${inscricao.oferta.status}}"></span>
-
-        <br><br>
-
-        <span th:text="#{aluno.statusOferta}">Status da Oferta:</span>
-
-        <br>
 
         <a th:if="${inscricao.oferta.status == 'Em andamento' && inscricao.statusPlano.name() == 'PENDENTE'}"
            th:href="@{/aluno/enviarPlano/{id}(id=${inscricao.id})}">
             <button type="button" th:text="#{aluno.btnEnviarPlano}">Enviar Plano de Trabalho</button>
         </a>
 
-
         <span th:if="${inscricao.statusPlano.name() == 'ENVIADO'}"
               th:text="#{aluno.planoEnviado}"
               style="color: green; display: block; margin-top: 10px;">
         </span>
 
-        <br>
+        <br><br>
         <hr>
     </li>
 </ul>
@@ -73,5 +58,6 @@
 <a th:href="@{/login}">
     <button type="button" th:text="#{geral.voltarLogin}">Voltar para a tela de Login</button>
 </a>
+
 </body>
 </html>
