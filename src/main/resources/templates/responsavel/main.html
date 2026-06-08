@@ -1,4 +1,18 @@
-<h1 th:text="#{resp.titulo}">PAGINA DO PROFESSOR RESPONSAVEL</h1>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{resp.titulo}">
+        Página do Professor Responsável
+    </title>
+</head>
+
+<body>
+
+<h1 th:text="#{resp.titulo}">
+    PAGINA DO PROFESSOR RESPONSAVEL
+</h1>
 
 <ul>
     <li th:each="oferta : ${ofertas}">
@@ -26,6 +40,7 @@
                 </li>
             </ul>
         </div>
+
         <br>
         <a th:href="@{/responsavel/oferta/{id}/detalhes(id=${oferta.id})}">
             <button type="button" th:text="#{geral.verDetalhes}">Ver Detalhes</button>
@@ -38,3 +53,15 @@
         </form>
     </li>
 </ul>
+
+<br>
+<hr>
+
+<a th:href="@{/login}">
+    <button type="button" th:text="#{geral.voltarLogin}">
+        Voltar para a tela de Login
+    </button>
+</a>
+
+</body>
+</html>
