@@ -1,18 +1,30 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title th:text="#{super1.titulo}"></title>
-    </head>
 <body>
+<h1 th:text="#{super1.titulo}">Ofertas sob minha supervisão</h1>
 
-<h1></h1>
-
+<table class="table">
+    <thead>
+    <tr>
+        <th th:text="#{oferta.nome}">Oferta</th>
+        <th th:text="#{aluno.nome}">Aluno</th>
+        <th th:text="#{inscricao.status}">Status</th>
+        <th th:text="#{geral.acoes}">Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="inscricao : ${inscricoes}">
+        <td th:text="${inscricao.oferta.nome}"></td>
+        <td th:text="${inscricao.aluno.nome}"></td>
+        <td th:text="${inscricao.statusPlano}"></td>
+        <td>
+            <a th:href="@{/supervisor/aprovar-plano/{id}(id=${inscricao.id})}" th:text="#{supervisor.acao.analisar}">Analisar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
 
 <br>
 <hr>
 <a th:href="@{/login}">
-    <button type="button" th:text="#{geral.voltarLogin}">Voltar para a tela de Login</button>
+    <button type="button" th:text="#{geral.voltarLogin}">Voltar</button>
 </a>
-
 </body>
-</html>

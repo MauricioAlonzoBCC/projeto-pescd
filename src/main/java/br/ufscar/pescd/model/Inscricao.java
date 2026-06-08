@@ -40,6 +40,12 @@ public class Inscricao {
     @Column(name = "carga_horaria_disciplina")
     private Integer cargaHorariaDisciplina;
 
+    @Column(columnDefinition = "TEXT", name = "parecer_plano")
+    private String parecerPlano;
+
+    @Column(name = "data_aprovacao_plano")
+    private LocalDateTime dataAprovacaoPlano;
+
     @Lob // armazenar arquivos binários grandes no banco de dados
     @Column(name = "arquivo_documentacao", length = 5242880) // máx de 5MB
     private byte[] arquivoDocumentacao;
@@ -151,4 +157,11 @@ public class Inscricao {
 
     public byte[] getArquivoPlano() { return arquivoPlano; }
     public void setArquivoPlano(byte[] arquivoPlano) { this.arquivoPlano = arquivoPlano; }
+
+
+    public String getParecerPlano() { return parecerPlano; }
+    public void setParecerPlano(String parecerPlano) { this.parecerPlano = parecerPlano; }
+
+    public LocalDateTime getDataAprovacaoPlano() { return dataAprovacaoPlano; }
+    public void setDataAprovacaoPlano(LocalDateTime dataAprovacaoPlano) { this.dataAprovacaoPlano = dataAprovacaoPlano; }
 }

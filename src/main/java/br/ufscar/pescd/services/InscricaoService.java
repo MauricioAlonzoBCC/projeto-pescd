@@ -117,6 +117,25 @@ public class InscricaoService {
         inscricaoRepository.save(inscricao);
     }
 
+    public void aprovarPlano(br.ufscar.pescd.dto.AprovarPlanoFormDTO dto) {
+        Inscricao inscricao = buscarPorID(dto.getInscricaoID());
+
+        // salva os dados preenchidos
+        inscricao.setParecerPlano(dto.getParecer());
+
+        // o status do aluno muda pra "plano aprovado"
+        inscricao.setStatusPlano(StatusPlano.APROVADO);
+
+        // o sistema registra o timestamp da operação
+        inscricao.setDataAprovacaoPlano(java.time.LocalDateTime.now());
+
+        inscricaoRepository.save(inscricao);
+    }
+
+    public List<Inscricao> buscarPorSupervisor(Usuario supervisor) {
+        return inscricaoRepository.findByOfertaProf(supervisor);
+    }
+
     // adiciona via csv
     public void processarCsvInscricoes(Long ofertaId, MultipartFile file) throws Exception {
         Oferta oferta = ofertaService.buscarPorId(ofertaId);

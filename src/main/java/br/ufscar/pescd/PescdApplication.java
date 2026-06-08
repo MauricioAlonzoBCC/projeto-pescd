@@ -4,6 +4,7 @@ import br.ufscar.pescd.model.FraseConfirmacao;
 import br.ufscar.pescd.model.Usuario;
 import br.ufscar.pescd.model.Oferta;
 import br.ufscar.pescd.model.Inscricao;
+import br.ufscar.pescd.model.StatusPlano;
 
 import br.ufscar.pescd.repositories.FraseRepository;
 import br.ufscar.pescd.repositories.InscricaoRepository;
@@ -191,5 +192,19 @@ public class PescdApplication {
 		FraseRepository fraseRepository = context.getBean(FraseRepository.class);
 
 		fraseRepository.save(frase);
+
+		Inscricao inscricao1 = new Inscricao();
+		inscricao1.setAluno(aluno);
+		inscricao1.setOferta(oferta2);
+		inscricao1.setStatusPlano(StatusPlano.ENVIADO);
+
+		inscricaoService.salvar(inscricao1);
+
+		Inscricao inscricao2 = new Inscricao();
+		inscricao2.setAluno(aluno2);
+		inscricao2.setOferta(oferta5);
+		inscricao2.setStatusPlano(StatusPlano.ENVIADO);
+
+		inscricaoService.salvar(inscricao2);
 	}
 }

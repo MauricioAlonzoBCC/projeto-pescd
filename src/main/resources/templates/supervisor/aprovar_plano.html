@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{supervisor.aprovarPlano.titulo}">Aprovar Plano de Trabalho</title>
+</head>
+<body>
+<h2 th:text="#{supervisor.aprovarPlano.titulo}">Aprovação de Plano de Trabalho</h2>
+
+<fieldset disabled>
+    <legend th:text="#{supervisor.dados.aluno.plano}">Dados do Aluno e Plano Enviado</legend>
+    <p><strong th:text="#{aluno.nome} + ':'"></strong> <span th:text="${inscricao.aluno.nome}"></span></p>
+    <p><strong th:text="#{disciplina.codigo} + ':'"></strong> <span th:text="${inscricao.codigoDisciplina}"></span></p>
+    <p><strong th:text="#{disciplina.nome} + ':'"></strong> <span th:text="${inscricao.nomeDisciplina}"></span></p>
+    <p><strong th:text="#{disciplina.curso} + ':'"></strong> <span th:text="${inscricao.cursoDisciplina}"></span></p>
+
+    <p><strong th:text="#{inscricao.arquivo.plano} + ':'"></strong>
+        <a th:if="${inscricao.arquivoPlano != null}" href="#" th:text="#{geral.download}">Fazer Download do PDF enviado</a>
+        <span th:if="${inscricao.arquivoPlano == null}" th:text="#{inscricao.nenhum.arquivo}">Nenhum arquivo anexado</span>
+    </p>
+</fieldset>
+
+<hr>
+
+<form th:action="@{/supervisor/aprovar-plano}" th:object="${aprovarPlanoForm}" method="post">
+    <input type="hidden" th:field="*{inscricaoID}" />
+    <div>
+        <label for="parecer" th:text="#{inscricao.parecer} + '*'">Parecer *</label><br/>
+        <textarea id="parecer" th:field="*{parecer}" rows="5" cols="40"></textarea>
+        <span th:if="${#fields.hasErrors('parecer')}" th:errors="*{parecer}" style="color:red;"></span>
+    </div>
+    <br/>
+    <button type="submit" th:text="#{supervisor.btn.aprovar}">Aprovar Plano</button>
+    <a th:href="@{/supervisor/main}"><button type="button" th:text="#{geral.cancelar}">Cancelar</button></a>
+</form>
+</body>
+</html>
