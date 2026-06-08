@@ -187,6 +187,13 @@ public class PescdApplication {
 
 		inscricaoService.salvar(inscricaoPendente);
 
+		//para testar a AL.04
+		Inscricao inscricaoAvancada = new Inscricao(aluno2, oferta2);
+		inscricaoAvancada.setStatusPlano(StatusPlano.DOCUMENTACAO_ENVIADA);
+		inscricaoAvancada.setInstituicaoMinistrou("Ufscar");
+		inscricaoAvancada.setNomeDisciplinaMinistrada("Banco de Dados");
+
+		inscricaoService.salvar(inscricaoAvancada);
 
 		FraseConfirmacao frase = new FraseConfirmacao("Deseja mesmo encerrar essa oferta?");
 		FraseRepository fraseRepository = context.getBean(FraseRepository.class);

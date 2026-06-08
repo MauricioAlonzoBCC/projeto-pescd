@@ -66,6 +66,10 @@ public class Inscricao {
     @Column(columnDefinition = "LONGBLOB")
     private byte[] arquivoPlano;
 
+    @Lob
+    @Column(name = "arquivo_relatorio_final", length = 5242880) // Limite de 5MB
+    private byte[] arquivoRelatorioFinal;
+
 
     // Construtor vazio (obrigatório para o Spring/Hibernate funcionar)
     public Inscricao() {}
@@ -164,4 +168,6 @@ public class Inscricao {
 
     public LocalDateTime getDataAprovacaoPlano() { return dataAprovacaoPlano; }
     public void setDataAprovacaoPlano(LocalDateTime dataAprovacaoPlano) { this.dataAprovacaoPlano = dataAprovacaoPlano; }
+    public byte[] getArquivoRelatorioFinal() { return arquivoRelatorioFinal; }
+    public void setArquivoRelatorioFinal(byte[] arquivoRelatorioFinal) { this.arquivoRelatorioFinal = arquivoRelatorioFinal; }
 }
